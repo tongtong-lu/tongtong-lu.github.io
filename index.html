@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shorter URL</title>
+  <style>
+    .result-link {
+      padding: 1rem;
+      background: #fafafa;
+      border: 1px dashed #eee;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+    <div class="card-body">
+      <p class="card-title">Paste your file share link here:<span><a href="">how?</a></span></p>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="text">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" onclick='shorturl()' id="searchbtn">Shorten it!</button>
+        </div>
+        
+      </div>    
+      <div class="result-link" id="result" onclick='copyurl("result")' data-toggle="popover" data-placement="auto" data-content="Copied!">Your Figma short link will show up here. </div>
+      <p id="notice"></p>             
+    </div>
+  </div>
+  <div class=" " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" " role="document">
+      <div class="">
+        <div class="">
+      </div>
+    </div>
+  </div>         
+  <script src="https://gcore.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+  <script src="https://gcore.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://gcore.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
+  <script src="https://gcore.jsdelivr.net/npm/url-shorten-worker@1.0.5/main.js" crossorigin="anonymous"></script>
+</body>
+</html>
