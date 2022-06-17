@@ -62,7 +62,7 @@
     .result-link {
       padding: 1rem;
       background: #fafafa;
-      border: 1px dashed #eee;
+      border: 2px dashed #eee;
       border-radius: 0.5rem;
       margin-top: 1rem;
       display: none;
@@ -100,6 +100,13 @@
       box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
       visibility: hidden;
     }
+    iframe{
+      display:none;
+      border:none;
+      width: 320px;
+      height:320px;
+
+    }
   </style>
 </head>
 <body>
@@ -117,8 +124,9 @@
       <div class="result-link" onclick='copyurl("result")'><p id="result"></p><span id="resultplaceholder">Click to copy.</span> </div>
       <!-- <p id="notice"></p> -->
     </div>
-    <p class="footnote"><a href="" target="_blank">Support</a> | <a href="" target="_blank">Feedback</a></p>
+    <p class="footnote"><a id="feedback" onclick='showform()' href="#feedback-form">Feedback</a> | <a href="https://tongtonglu.site/" target="_blank">About Author</a></p>
   </div>
+  <iframe id="feedback-form" class="card-body" src="https://chilipepper.io/form/insane-pickled-fresno-5145611e-ec92-4a98-ac05-ba7e8e520ebe"></iframe><br>
   <div class="center-wrapper">
     <div class="tooltip" id="copiedprompt">🎉 Copied to clipboard.</div>
   </div>
@@ -142,7 +150,7 @@
     // }
 
     document.getElementById("searchbtn").disabled=true;
-	document.getElementById("searchbtn").innerHTML='Please wait...';
+	document.getElementById("searchbtn").innerHTML='Doing magic...';
     fetch(window.location.pathname, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -231,7 +239,9 @@
         document.getElementById('searchbtn').disabled = false;
       }
     });
-    
+    function showform() {
+      $('#feedback-form').show();
+    }
   </script>
 </body>
 </html>
