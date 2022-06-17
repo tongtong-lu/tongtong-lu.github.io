@@ -10,8 +10,8 @@
     }
     .card-body {
       max-width: 320px;
-      margin: auto;
-      padding: 1rem;
+      margin: 2rem auto 1rem;
+      padding: 2rem 1rem 1rem;
       background: #fff;
       border-radius: 1rem;
       text-align: center;
@@ -25,7 +25,7 @@
       border: 1px solid #eee;
       /* height: 32px; */
       padding: 8px 16px;
-      margin: 0.5rem 0;
+      margin: 0.5rem 0 1rem;
       border-radius: 0.5rem;
       
     }
@@ -39,19 +39,22 @@
       background-size: 200%;
       border: none;
       border-radius: 0.5rem;
-      padding: 0.8rem 1rem;
+      padding: 0.75rem 1rem;
       color: #fff;
       font-size: 1rem;
       font-weight: bold;
-      transition: ease-in-out 150ms;
+      transition: ease-in-out 50ms;
 
     }
-    .btn:hover {
+    .btn:disabled {
+      filter: opacity(0.5);
+    }
+    .btn:hover:not([disabled]) {
       transition: ease-in-out 150ms;
       background-position: 50% 0%;
       cursor: pointer;
     }
-    .btn:active {
+    .btn:active:not([disabled]) {
       transition: ease-in-out 50ms;
       background-position: 40% 0%;
       filter: brightness(0.9);
@@ -62,12 +65,13 @@
       border: 1px dashed #eee;
       border-radius: 0.5rem;
       margin-top: 1rem;
+      display:none;
     }
     .result-link:hover {
       background: #eee;
       cursor: pointer;
     }
-    .footnote {
+    .footnote, .footnote>a {
       font-size: 0.75rem;
       color: #AAB1B8;
       margin: 0.5rem auto;
@@ -77,6 +81,24 @@
       border: 0;
       border-top: 1px dashed #eee;
       margin-top: 1rem;
+    }
+    .center-wrapper {
+      width:100%;
+      margin:auto;
+      position:fixed;
+      bottom: 1.5rem;
+      text-align:center;
+    }
+    #copiedprompt {
+      display:inline;
+      text-align:center;
+      background: #1E1E1E;
+      margin: auto;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      border-radius: 6px;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
+      visibility: hidden;
     }
   </style>
 </head>
@@ -91,11 +113,14 @@
           <button class="btn btn-primary" type="button" onclick='shorturl()' id="searchbtn">Shorten it</button>
         <!-- </div> -->
       </div>
-      <hr>
-      <div class="result-link" id="result" onclick='copyurl("result")' data-toggle="popover" data-placement="auto" data-content="Copied!">Your Figma short link will show up here. </div>
+      <!-- <hr> -->
+      <div class="result-link" onclick='copyurl("result")'><p id="result"></p><span id="resultplaceholder">Your Figma short link will show up here.</span> </div>
       <!-- <p id="notice"></p> -->
     </div>
     <p class="footnote"><a href="" target="_blank">Support</a> | <a href="" target="_blank">Feedback</a></p>
+  </div>
+  <div class="center-wrapper">
+    <div class="tooltip" id="copiedprompt">🎉 Copied to clipboard.</div>
   </div>
   <div class=" " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" " role="document">
@@ -103,10 +128,110 @@
         <div class="">
       </div>
     </div>
-  </div>
+  </div>         
   <script src="https://gcore.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
   <script src="https://gcore.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://gcore.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
-  <script src="https://gcore.jsdelivr.net/npm/url-shorten-worker@1.0.5/main.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://gcore.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://gcore.jsdelivr.net/npm/url-shorten-worker@1.0.5/main.js" crossorigin="anonymous"></script> -->
+  <script>
+    let res
+  function shorturl() {
+    // if(document.querySelector("#text").value==""){
+    //     alert("Url cannot be empty!")
+    //     return
+    // }
+
+    document.getElementById("searchbtn").disabled=true;
+	document.getElementById("searchbtn").innerHTML='Please wait...';
+    fetch(window.location.pathname, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: document.querySelector("#text").value })
+    }).then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    res = myJson;
+    document.getElementById("searchbtn").disabled=false;
+	document.getElementById("searchbtn").innerHTML=' Shorten it';
+    if(res.key!=="")
+    $('#result-link').show();
+    document.getElementById("result").innerHTML=window.location.host+res.key;
+    // $('#exampleModal').modal('show')
+  }).catch(function(err){alert("Unknow error. Please retry!");
+  console.log(err);
+  document.getElementById("searchbtn").disabled=false;
+	document.getElementById("searchbtn").innerHTML=' Shorten it';})
+  }
+  function copyurl (id, attr) {
+    let target = null;
+
+    if (attr) {
+        target = document.createElement('div');
+        target.id = 'tempTarget';
+        target.style.opacity = '0';
+        if (id) {
+            let curNode = document.querySelector('#' + id);
+            target.innerText = curNode[attr];
+        } else {
+            target.innerText = attr;
+        }
+        document.body.appendChild(target);
+    } else {
+        target = document.querySelector('#' + id);
+    }
+
+    try {
+        let range = document.createRange();
+        range.selectNode(target);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        console.log('Copy success')
+        document.getElementById('copiedprompt').style.visibility = "visible";
+        setTimeout(function() {
+          document.getElementById('copiedprompt').style.visibility = "hidden";
+        }, 2000); 
+        
+    } catch (e) {
+        console.log('Copy error')
+    }
+
+    if (attr) {
+        // remove temp target
+        target.parentElement.removeChild(target);
+    }
+
+  }
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  console.log("https://github.com/xyTom/Url-Shorten-Worker/")
+  let notice="Notice: This service is for demonstration purposes only and the generated short links will automatically expire after 24 hours."
+  if(window.location.host=="5it.me"){
+    document.getElementById("notice").innerHTML=notice
+  }
+
+
+  </script>
+  <script>
+    document.getElementById('searchbtn').disabled = true; //Disable at first
+    //Listen for keyup event (after we hit a key)
+    //-----------------------------------------------------------
+    //NOTE: We can also use the change event, but the submit button
+    //      won't update until we finish typing the whole thing
+    //-----------------------------------------------------------
+    document.getElementById('text').addEventListener('keyup', e => {
+      //Check for the input's value
+      if (e.target.value == "") {
+        document.getElementById('searchbtn').disabled = true;
+      }
+      else {
+        document.getElementById('searchbtn').disabled = false;
+      }
+    });
+    
+  </script>
 </body>
 </html>
