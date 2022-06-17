@@ -65,13 +65,13 @@
       border: 1px dashed #eee;
       border-radius: 0.5rem;
       margin-top: 1rem;
-      display:none;
+      display: none;
     }
     .result-link:hover {
       background: #eee;
       cursor: pointer;
     }
-    .footnote, .footnote>a {
+    .footnote, .footnote>a, #resultplaceholder {
       font-size: 0.75rem;
       color: #AAB1B8;
       margin: 0.5rem auto;
@@ -114,7 +114,7 @@
         <!-- </div> -->
       </div>
       <!-- <hr> -->
-      <div class="result-link" onclick='copyurl("result")'><p id="result"></p><span id="resultplaceholder">Your Figma short link will show up here.</span> </div>
+      <div class="result-link" onclick='copyurl("result")'><p id="result"></p><span id="resultplaceholder">Click to copy.</span> </div>
       <!-- <p id="notice"></p> -->
     </div>
     <p class="footnote"><a href="" target="_blank">Support</a> | <a href="" target="_blank">Feedback</a></p>
