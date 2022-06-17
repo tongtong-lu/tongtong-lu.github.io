@@ -3,40 +3,110 @@
 <head>
   <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Shorter URL</title>
+  <title>Figma SHort Link</title>
   <style>
+    body {
+      background: #f5f5f5;
+    }
+    .card-body {
+      max-width: 320px;
+      margin: auto;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 1rem;
+      text-align: center;
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      line-height: 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      border: 1px solid #eee;
+      /* height: 32px; */
+      padding: 8px 16px;
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      
+    }
+    .input:hover {
+      border: 1px solid #14B3F4;
+    }
+    .btn {
+      width:100%;
+      background-image: linear-gradient(90deg, #14B3F4 0%, #6549D5 25%, #E33FA1 50%, #FB5343 75%, #FD7B42 100%);
+      background-position: 0% 0%;
+      background-size: 200%;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: ease-in-out 150ms;
+
+    }
+    .btn:hover {
+      transition: ease-in-out 150ms;
+      background-position: 50% 0%;
+      cursor: pointer;
+    }
+    .btn:active {
+      transition: ease-in-out 50ms;
+      background-position: 40% 0%;
+      filter: brightness(0.9);
+    }
     .result-link {
       padding: 1rem;
       background: #fafafa;
       border: 1px dashed #eee;
       border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+    .result-link:hover {
+      background: #eee;
+      cursor: pointer;
+    }
+    .footnote {
+      font-size: 0.75rem;
+      color: #AAB1B8;
+      margin: 0.5rem auto;
+      text-align: center;
+    }
+    hr{
+      border: 0;
+      border-top: 1px dashed #eee;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
     <div class="card-body">
-      <p class="card-title">Paste your file share link here:<span><a href="">how?</a></span></p>
+      <svg width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#a)"><path d="M0 24C0 12.7 0 7 3.5 3.5S12.7 0 24 0h8c11.3 0 17 0 20.5 3.5S56 12.7 56 24v8c0 11.3 0 17-3.5 20.5S43.3 56 32 56h-8c-11.3 0-17 0-20.5-3.5S0 43.3 0 32v-8Z" fill="url(#b)"/><g opacity=".9" filter="url(#c)" fill-rule="evenodd" clip-rule="evenodd"><path d="M23.8 5.3a.6.6 0 0 1 1 0L26 8.2l2.8 1a.6.6 0 0 1 0 1.1l-2.8 1-1 3a.6.6 0 0 1-1.1 0l-1.1-3-3-1-.2-.5c0-.3 0-.5.3-.6l2.9-1 1-2.9ZM5.6 16.2l4.2-1.6 1.6-4.3a.9.9 0 0 1 1.6 0l1.6 4.3 4.3 1.6a.9.9 0 0 1 0 1.6l-4.3 1.6-1.6 4.3a.9.9 0 0 1-1.6 0l-1.6-4.3-4.2-1.6a.9.9 0 0 1 0-1.6ZM37 40.5l4.3-1.6 1.6-4.3c0-.4.4-.5.8-.5.3 0 .7.1.8.5l1.6 4.3 4.2 1.6c.4.1.6.4.6.8s-.2.7-.6.8l-4.2 1.6-1.6 4.3a.9.9 0 0 1-1.6 0l-1.6-4.3-4.3-1.6c-.4-.1-.6-.4-.6-.8s.2-.7.6-.8Zm-1.6-11.1a2 2 0 0 1 0-2.9l7.4-7.3a3.6 3.6 0 0 0-5.1-5.2l-7.4 7.4a2 2 0 1 1-2.8-2.8l7.4-7.4A7.6 7.6 0 0 1 45.8 22l-7.4 7.4a2 2 0 0 1-2.9 0ZM22 27a2 2 0 0 0-2.9 0l-7.3 7.4a7.6 7.6 0 0 0 10.8 10.8l7.3-7.4a2 2 0 1 0-2.8-2.8l-7.4 7.4a3.6 3.6 0 0 1-5.1-5.2l7.4-7.3c.8-.8.8-2.1 0-2.9Zm1.1 4a2 2 0 1 0 2.9 2.8l8.5-8.5a2 2 0 1 0-2.9-2.8L23 31Z" fill="url(#d)" fill-opacity=".9"/><path d="M23.8 5.3a.6.6 0 0 1 1 0L26 8.2l2.8 1a.6.6 0 0 1 0 1.1l-2.8 1-1 3a.6.6 0 0 1-1.1 0l-1.1-3-3-1-.2-.5c0-.3 0-.5.3-.6l2.9-1 1-2.9ZM5.6 16.2l4.2-1.6 1.6-4.3a.9.9 0 0 1 1.6 0l1.6 4.3 4.3 1.6a.9.9 0 0 1 0 1.6l-4.3 1.6-1.6 4.3a.9.9 0 0 1-1.6 0l-1.6-4.3-4.2-1.6a.9.9 0 0 1 0-1.6ZM37 40.5l4.3-1.6 1.6-4.3c0-.4.4-.5.8-.5.3 0 .7.1.8.5l1.6 4.3 4.2 1.6c.4.1.6.4.6.8s-.2.7-.6.8l-4.2 1.6-1.6 4.3a.9.9 0 0 1-1.6 0l-1.6-4.3-4.3-1.6c-.4-.1-.6-.4-.6-.8s.2-.7.6-.8Zm-1.6-11.1a2 2 0 0 1 0-2.9l7.4-7.3a3.6 3.6 0 0 0-5.1-5.2l-7.4 7.4a2 2 0 1 1-2.8-2.8l7.4-7.4A7.6 7.6 0 0 1 45.8 22l-7.4 7.4a2 2 0 0 1-2.9 0ZM22 27a2 2 0 0 0-2.9 0l-7.3 7.4a7.6 7.6 0 0 0 10.8 10.8l7.3-7.4a2 2 0 1 0-2.8-2.8l-7.4 7.4a3.6 3.6 0 0 1-5.1-5.2l7.4-7.3c.8-.8.8-2.1 0-2.9Zm1.1 4a2 2 0 1 0 2.9 2.8l8.5-8.5a2 2 0 1 0-2.9-2.8L23 31Z" fill="#fff"/></g></g><defs><linearGradient id="b" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#14B3F4"/><stop offset=".2" stop-color="#6549D5"/><stop offset=".5" stop-color="#E33FA1"/><stop offset=".7" stop-color="#FB5343"/><stop offset="1" stop-color="#FD7B42"/></linearGradient><linearGradient id="d" x1="7" y1="7" x2="50.5" y2="52.9" gradientUnits="userSpaceOnUse"><stop stop-color="#14B3F4"/><stop offset=".2" stop-color="#6549D5"/><stop offset=".5" stop-color="#E33FA1"/><stop offset=".7" stop-color="#FB5343"/><stop offset="1" stop-color="#FD7B42"/></linearGradient><clipPath id="a"><path fill="#fff" d="M0 0h56v56H0z"/></clipPath><filter id="c" x="-3" y="-3" width="62" height="59.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset/><feGaussianBlur stdDeviation="4"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_33_2"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_33_2" result="shape"/></filter></defs></svg>
+      
+      <h3 class="card-title">Figma Short Link</h3>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="text">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button" onclick='shorturl()' id="searchbtn">Shorten it!</button>
-        </div>
-        
-      </div>    
+        <input type="text" class="form-control" id="text" placeholder="Paste your file share link here:">
+        <!-- <div class="input-group-append"> -->
+          <button class="btn btn-primary" type="button" onclick='shorturl()' id="searchbtn">Shorten it</button>
+        <!-- </div> -->
+      </div>
+      <hr>
       <div class="result-link" id="result" onclick='copyurl("result")' data-toggle="popover" data-placement="auto" data-content="Copied!">Your Figma short link will show up here. </div>
-      <p id="notice"></p>             
+      <!-- <p id="notice"></p> -->
     </div>
+    <p class="footnote"><a href="" target="_blank">Support</a> | <a href="" target="_blank">Feedback</a></p>
   </div>
-  <div class=" " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class=" " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" " role="document">
       <div class="">
         <div class="">
       </div>
     </div>
-  </div>         
+  </div>          -->
   <script src="https://gcore.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
   <script src="https://gcore.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://gcore.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
+  <!-- <script src="https://gcore.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script> -->
   <script src="https://gcore.jsdelivr.net/npm/url-shorten-worker@1.0.5/main.js" crossorigin="anonymous"></script>
 </body>
 </html>
