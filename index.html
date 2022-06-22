@@ -141,6 +141,106 @@
   <script src="https://gcore.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <!-- <script src="https://gcore.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script> -->
   <!-- <script src="https://gcore.jsdelivr.net/npm/url-shorten-worker@1.0.5/main.js" crossorigin="anonymous"></script> -->
-  <script src="http://figmashort.link/figs.js"></script>
+  <script>
+    
+    let res
+  function shorturl() {
+    // if(document.querySelector("#text").value==""){
+    //     alert("Url cannot be empty!")
+    //     return
+    // }
+
+    document.getElementById("searchbtn").disabled=true;
+	document.getElementById("searchbtn").innerHTML='Doing magic...';
+    fetch(window.location.pathname, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: document.querySelector("#text").value })
+    }).then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    res = myJson;
+    document.getElementById("searchbtn").disabled=false;
+	document.getElementById("searchbtn").innerHTML=' Shorten it';
+    if(res.key!=="")
+    $('.result-link').show();
+    document.getElementById("result").innerHTML=window.location.host+res.key;
+    // $('#exampleModal').modal('show')
+  }).catch(function(err){alert("Unknow error. Please retry!");
+  console.log(err);
+  document.getElementById("searchbtn").disabled=false;
+	document.getElementById("searchbtn").innerHTML=' Shorten it';})
+  }
+  function copyurl (id, attr) {
+    let target = null;
+
+    if (attr) {
+        target = document.createElement('div');
+        target.id = 'tempTarget';
+        target.style.opacity = '0';
+        if (id) {
+            let curNode = document.querySelector('#' + id);
+            target.innerText = curNode[attr];
+        } else {
+            target.innerText = attr;
+        }
+        document.body.appendChild(target);
+    } else {
+        target = document.querySelector('#' + id);
+    }
+
+    try {
+        let range = document.createRange();
+        range.selectNode(target);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        console.log('Copy success')
+        document.getElementById('copiedprompt').style.visibility = "visible";
+        setTimeout(function() {
+          document.getElementById('copiedprompt').style.visibility = "hidden";
+        }, 2000);
+
+    } catch (e) {
+        console.log('Copy error')
+    }
+
+    if (attr) {
+        // remove temp target
+        target.parentElement.removeChild(target);
+    }
+
+  }
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  console.log("https://github.com/xyTom/Url-Shorten-Worker/")
+  let notice="Notice: This service is for demonstration purposes only and the generated short links will automatically expire after 24 hours."
+  if(window.location.host=="5it.me"){
+    document.getElementById("notice").innerHTML=notice
+  }
+
+    document.getElementById('searchbtn').disabled = true; //Disable at first
+    //Listen for keyup event (after we hit a key)
+    //-----------------------------------------------------------
+    //NOTE: We can also use the change event, but the submit button
+    //      won't update until we finish typing the whole thing
+    //-----------------------------------------------------------
+    document.getElementById('text').addEventListener('keyup', e => {
+      //Check for the input's value
+      if (e.target.value.match(/^http[s]?:\/\/w?w?w?.?figma.com/)) {
+        document.getElementById('searchbtn').disabled = false;
+      }
+      else {
+        document.getElementById('searchbtn').disabled = true;
+      }
+    });
+    function showform() {
+      $('#feedback-form').show();
+    }
+
+  </script>
 </body>
 </html>
