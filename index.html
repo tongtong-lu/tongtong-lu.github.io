@@ -232,11 +232,11 @@
     //-----------------------------------------------------------
     document.getElementById('text').addEventListener('keyup', e => {
       //Check for the input's value
-      if (e.target.value == "") {
-        document.getElementById('searchbtn').disabled = true;
+      if (e.target.value.match(/^http[s]?:\/\/w?w?w?.?figma.com/)) {
+        document.getElementById('searchbtn').disabled = false;
       }
       else {
-        document.getElementById('searchbtn').disabled = false;
+        document.getElementById('searchbtn').disabled = true;
       }
     });
     function showform() {
