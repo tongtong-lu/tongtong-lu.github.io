@@ -36,6 +36,8 @@
       transition: ease-in-out 50ms;
       max-height: 64px;
       overflow-y: auto;
+      display:flex;
+      -webkit-user-modify: read-write-plaintext-only;
       
       
     }
@@ -288,6 +290,20 @@
     function showform() {
       $('#feedback-form').show();
     }
+
+var myinput = document.getElementById("text");
+myinput.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("searchbtn").click();
+    }
+});
+ document.onkeydown = function(e){
+        if(e.keyCode==13){
+        e.preventDefault();//禁用回车的默认事件
+    }
+}
+
   </script>
 </body>
 </html>
